@@ -1,0 +1,7 @@
+{% extends 'myhome_base.html' %}
+{% load i18n %}
+
+{% block main_panel %}
+<h3>Reuslts for "{{ tag.name }}"</h3>
+{% include "tagging/tagged_items.html" %}
+{% endblock %}

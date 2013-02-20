@@ -638,6 +638,10 @@ textarea:-moz-placeholder {/* for FF */
     color: #ff9933;
     text-decoration: underline;
 }
+#header .search-div {
+    padding-top:5px;
+    float: right;
+}
 
 /* footer */
 #footer { 
@@ -1488,6 +1492,13 @@ textarea:-moz-placeholder {/* for FF */
     width:314px;
 }
 #repo-share-form .share-permission-select {
+    width:100%;
+}
+/* edit-tag-form */
+#edit-tag-form {
+    width:260px;
+}
+#edit-tag-form input[type="text"] {
     width:100%;
 }
 /* group-join-form */

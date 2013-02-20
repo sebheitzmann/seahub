@@ -1,0 +1,34 @@
+{% load seahub_tags i18n %}
+{% load url from future %}
+
+{% if tag %}
+<table>
+  <tr>
+    <th width="5%"></th>
+    <th width="70%" class="dirent-name"> {% trans "Name"%} <span id="name-up" class="tri-bg tri-up-order-bg"></span> <span id="name-down" class="tri-bg tri-down-order-bg"></span></th>
+    <th width="10%">{% trans "Size"%}</th>
+    <th width="15%">{% trans "Last Update" %} <span id="time-up" class="tri-bg tri-up-order-bg"></span> <span id="time-down" class="tri-bg tri-down-order-bg"></span></th>
+  </tr>
+
+  {% for dirent in rv %}
+  <tr class="file-item" data-name="{{dirent.obj_name}}" data-time="{% if dirent.last_modified %}{{ dirent.last_modified }} {%else %}0{% endif %}">
+    <td class="icon-container"><img src="{{ MEDIA_URL }}img/file/{{ dirent.obj_name|file_icon_filter }}" alt="{% trans "File"%}" /></td>
+    <td>
+      <a class="op" href="{% url 'repo_view_file' dirent.repo_id %}?p={{ dirent.path|urlencode }}">{{ dirent.obj_name }}</a>
+    </td>
+    <td>{{ dirent.file_size|filesizeformat }}</td>
+    <td>
+      {% if dirent.last_modified %}
+      {{ dirent.last_modified|translate_seahub_time }}
+      {% else %}
+      {% trans "Fetch failed" %}
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<div class="empty-tips">
+  <h2 class="center-contents">{% trans "Sorry, there is no such tag match your search" %}</h2>
+</div>
+{% endif %}
