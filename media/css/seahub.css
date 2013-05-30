@@ -55,14 +55,15 @@ a.normal {font-weight: normal;}
 a:hover { color: #ff9933; text-decoration: underline; }
 img { border:none; }
 textarea {
-    border: 1px solid #ddd;
     overflow: auto; /* rm default vertical scrollbar in ie */
     resize: vertical; /* for drag */
     outline:0;
 }
+textarea, select, input {
+    border: 1px solid #ddd;
+}
 input { 
     height:22px;
-    border: 1px solid #ddd;
     margin:3px 0;
     outline:0;
 }
@@ -510,8 +511,6 @@ textarea:-moz-placeholder {/* for FF */
 }
 
 /* top-bar */
-#top-bar {
-}
 .top-bar-inner {
     background:#2d2d2d;
 }
@@ -533,10 +532,15 @@ textarea:-moz-placeholder {/* for FF */
     height:24px;
     line-height:24px;
 }
+.top-bar-con button {
+    padding:0 6px;
+    border-radius:2px;
+    line-height:16px;
+}
 .top-bar-con .avatar-link {
     height:16px;
     vertical-align:middle;
-    margin-bottom:3px;
+    margin-bottom:2px;
     *margin-bottom:0;/*for ie 7*/
 }
 .top-bar-con .avatar {
@@ -2350,8 +2354,7 @@ textarea:-moz-placeholder {/* for FF */
 
 /*send-msg-form*/
 #link-send-input,
-#mass_email,
-#mass_msg,
+#mass-msg,
 #share-link,
 #added-member-name,
 #added-admin-name {
@@ -2362,56 +2365,27 @@ textarea:-moz-placeholder {/* for FF */
 #member-add-form {
     width:266px;
 }
-#send-msg-form {
-    width:320px;
-}
-#mass_email {
+#mass-msg {
     width:314px;
 }
-#mass_msg {
-    width:314px;
+#mass-email {
+    width:322px;
 }
-#send-msg-form .share-permission-select {
-    width:100%;
-}
-
 /*tabs */
-#tabs,
-#send-msg-tabs {
+#tabs {
     font-size:1em;
     padding:0;
     border:0;
     min-height:150px;
     margin-bottom:75px;
 }
-#send-msg-tabs {
-    margin-bottom:0;
-}
-#tabs-nav,
-#send-msg-tabs-nav {
+#tabs-nav {
     padding:0;
-}
-#send-msg-tabs-nav {
-    height:30px;
-    border-bottom:1px solid #ddd;
-    border-radius:0;
-    margin-bottom:10px;
 }
 #tabs-nav li {
     float:left;
     border:0;
     background:none;
-}
-#send-msg-tabs-nav li {
-    display:inline-block;
-    border:1px solid transparent;
-    border-bottom:0;
-    background:none;
-}
-#send-msg-tabs-nav li a {
-    color:#666;
-    line-height:16px;
-    padding:6px 13px;
 }
 #tabs-nav .long-item {
     margin-left:.4em;
@@ -2426,32 +2400,15 @@ textarea:-moz-placeholder {/* for FF */
     color:#DD4B39;
     border-bottom:2px solid #DD4B39;
 }
-#send-msg-tabs-nav .ui-state-active {
-    border-color:#ddd;
-    border-radius:3px 3px 0 0;
-    background:#fff;
-    margin-bottom:-1px;
-}
-#send-msg-tabs-nav .ui-state-active a {
-    font-weight:bold;
-}
 #tabs-nav li a:hover {
     color:#DD4B39;
 }
 #send-msg-tabs-nav li a:hover {
     color:#333;
 }
-#tabs .ui-tabs-panel,
-#send-msg-tabs .ui-tabs-panel {
+#tabs .ui-tabs-panel {
     padding:0;
 }
-#send-msg-tabs .option-list {
-    max-height:200px;
-    overflow:auto;
-    margin-bottom:5px;
-    position:relative;/* to fix ie7 'scroll position' problem */
-}
-
 #personal-message-form {
     padding:6px;
     width:562px;

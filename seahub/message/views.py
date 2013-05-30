@@ -35,11 +35,8 @@ def message_list(request):
     for msg in msgs:
         total_unread += msg[1]['not_read']
 
-    contacts = Contact.objects.get_registered_contacts_by_user(username)
-
     return render_to_response('message/all_msg_list.html', {
             'msgs': msgs,
-            'contacts': contacts,
             'total_unread': total_unread,
         }, context_instance=RequestContext(request))
 
@@ -138,10 +135,13 @@ def message_send(request):
 def msg_count(request):
     """Count user's unread message.
     """
-    result = {}
+    if not request.is_ajax():
+        raise Http404
+
     content_type = 'application/json; charset=utf-8'
     username = request.user.username
     
     count = UserMessage.objects.count_unread_messages_by_user(username)
+    result = {}
     result['count'] = count
     return HttpResponse(json.dumps(result), content_type=content_type)
