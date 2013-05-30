@@ -10,17 +10,17 @@
 <table>
     <tr>
         <th width="5%"></th>
-        <th width="20%">{% trans "Email"%}</th>
-        <th width="60%">{% trans "Message"%}</th>
-        <th width="15%">{% trans "Time"%}</th>
+        <th width="25%">{% trans "Email"%}</th>
+        <th width="50%">{% trans "Message"%}</th>
+        <th width="20%">{% trans "Time"%}</th>
     </tr>
     {% for key,value in msgs %}
     {% with not_read=value.not_read %}
     <tr data-href="{% url 'user_msg_list' key|id_or_email %}" class="{% if not_read > 0 %}bold{% endif %}">
-        <td>{% avatar key 20 %}</td>       
+        <td class="icon-container">{% avatar key 19 %}</td>       
         <td>{{ key }}{% if not_read > 0%}({{not_read}}){% endif %}</td>
-        <td> {{ value.last_msg|truncatechars:60 }} </td>
-        <td>{{  value.last_time|translate_seahub_time }}</td>
+        <td>{{ value.last_msg|truncatechars:60 }}</td>
+        <td>{{ value.last_time|translate_seahub_time }}</td>
     </tr>
     {% endwith %}
     {% endfor %}
@@ -31,9 +31,8 @@
 {% block extra_script %}
 <script type="text/javascript">
 $(function(){       
-    $('*[data-href]').click(function(){
-        window.location = $(this).data('href');
-        return false;
+    $('tr[data-href]').click(function(){
+        location.href = $(this).data('href');
     });
 });
 </script>

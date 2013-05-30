@@ -155,9 +155,6 @@ td { color: #333; }
 table img {
     vertical-align:middle;
 }
-tr.bold {
-    font-weight:bold;
-}
 p {
     margin:0.5em 0;
 }
@@ -1618,8 +1615,7 @@ textarea:-moz-placeholder {/* for FF */
 #grp-repos-commits td {
     padding:6px 3px;
 }
-#group-reply,
-.new-reply-msg-list {
+.msg-panel {
     width:640px;
     margin-top:10px;
 }
@@ -1627,7 +1623,7 @@ textarea:-moz-placeholder {/* for FF */
     font-size:12px;
     color:#333;
 }
-#group-message-form {
+.msg-form {
     padding:6px;
     width:562px;
     background:#f9f9f9;
@@ -1636,7 +1632,7 @@ textarea:-moz-placeholder {/* for FF */
     margin-left:64px;
     position:relative;
 }
-#group-message-form .avatar {
+.msg-form .avatar {
     position:absolute;
     left:-64px;
     top:-1px;
@@ -1663,6 +1659,9 @@ textarea:-moz-placeholder {/* for FF */
 .msg .txt {
     margin-left:64px;
 }
+#personal-msg-panel .msg .txt {
+    margin-right:64px;
+}
 .msg a {
     font-weight: normal;
 }
@@ -1676,6 +1675,11 @@ textarea:-moz-placeholder {/* for FF */
 }
 .msg-main .say {
     background-image:url('../img/say_white.png');
+}
+.msg-received .say {
+    background-image:url('../img/say_white_reverse.png');
+    left:auto;
+    right:-10px;
 }
 .msg-attachment {
     padding-top:10px;
@@ -2347,12 +2351,9 @@ textarea:-moz-placeholder {/* for FF */
 .search-results-item .time {
     color:#666;
 }
-
 #plan-form {
     width:260px;
 }
-
-/*send-msg-form*/
 #link-send-input,
 #mass-msg,
 #share-link,
@@ -2409,23 +2410,6 @@ textarea:-moz-placeholder {/* for FF */
 #tabs .ui-tabs-panel {
     padding:0;
 }
-#personal-message-form {
-    padding:6px;
-    width:562px;
-    background:#f9f9f9;
-    border:1px solid #c4c4c4;
-    border-radius:5px;
-    margin-left:64px;
-    position:relative;
-}
-#personal-message-form .avatar {
-    position:absolute;
-    left:-64px;
-    top:-1px;
-}
-
-#personal-message-form .submit,
-#personal-message-form .cancel,
 .reply-submit,
 .reply-cancel {
     margin-top:6px;

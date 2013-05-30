@@ -254,7 +254,7 @@ $('.add-msg').click(function() {
             if (contacts.length > 0) {
                 var opts = '';
                 for(var i = 0, len = contacts.length; i < len; i++) {
-                   opts += '<option value="' + contacts[i] + '">' + contacts[i] + '</option>'; 
+                   opts += '<option value="' + contacts[i] + '">' + contacts[i] + '</option>';
                 }
                 $('#mass-email').html(opts).select2({
                     placeholder: "{% trans "send to: click to select contacts" %}"
