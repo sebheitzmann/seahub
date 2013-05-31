@@ -29,13 +29,13 @@
     </ul>
 </div>
 
-<div id="personal-msg-panel" class="msg-panel">
+<div id="personal-msg-panel" class="msg-panel personal-msg-panel">
 
     {% if request.user.is_authenticated %}
     {% if to_email %}
     <form id="personal-message-form" class="msg-form" action="{% url 'message_send' %}" method="post" onsubmit="return check(this)">{% csrf_token %}
        {% avatar request.user.username 48 %}
-        <textarea name="mass_msg" id="message" placeholder="{% trans "Send a message..." %}"></textarea><br />
+        <textarea name="mass_msg" id="message" placeholder="{% trans "Send a message..." %}" class="msg-input"></textarea><br />
         <input type = "hidden" value = "{{ to_email }}" name= "mass_email"/>
         {% for error in form.message.errors %}
         <p class="error">{{ error|escape }}</p>

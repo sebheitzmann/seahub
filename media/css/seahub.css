@@ -513,26 +513,45 @@ textarea:-moz-placeholder {/* for FF */
 }
 .top-bar-con {
     color:#fff;
-    font-weight:bold;
     height:24px;
     width:950px;
     margin:0 auto;
+    position:relative;
 }
-.top-bar-con a {
+#send-msg-form {
+    padding:15px;
+    background:#fff;
+    border:1px solid #ddd;
+    box-shadow:0 0 5px #ccc;
+    position:absolute;
+    right:0;
+    top:24px;
+    z-index:100;/* for pages with jquery tabs*/
+}
+.top-bar-con .top-link {
     color:#ddd;
     font-weight:normal;
     padding:0 2px;
 }
-.top-bar-con a,
-.top-bar-con span {
+.top-bar-con .top-link {
     display:inline-block;
     height:24px;
     line-height:24px;
+}
+.top-bar-con .my-info {
+    padding-left:5px;
+    border-left:1px solid #aaa;
+    margin-right:3px;
 }
 .top-bar-con button {
     padding:0 6px;
     border-radius:2px;
     line-height:16px;
+    margin-right:2px;
+}
+#add-msg.add-msg-hl {
+    background:#fff;
+    line-height:22px;
 }
 .top-bar-con .avatar-link {
     height:16px;
@@ -544,17 +563,14 @@ textarea:-moz-placeholder {/* for FF */
     border-radius: 2px;
     -moz-border-radius: 2px;
 }
-.top-bar-con a.cur {
+.top-bar-con .cur {
     background:#000;
     border-top:2px solid #B00;
     height:20px;
     line-height:20px;
     padding-bottom:2px;
 }
-.top-bar-con span {
-    margin-right:3px;
-}
-.top-bar-con a:hover {
+.top-bar-con .top-link:hover {
     text-decoration:none;
     background:#a0a;
 }
@@ -590,12 +606,14 @@ textarea:-moz-placeholder {/* for FF */
 #to-group a {
     color:#000;
     display:block;
-    padding:0 5px;
+    padding:1px 5px;
+    font-weight:normal;
 }
 #account-context-selector a:hover,
 #lang-context-selector a:hover,
 #to-group a:hover {
     background:#eee;
+    text-decoration:none;
 }
 
 /* header */
@@ -1625,7 +1643,6 @@ textarea:-moz-placeholder {/* for FF */
 }
 .msg-form {
     padding:6px;
-    width:562px;
     background:#f9f9f9;
     border:1px solid #c4c4c4;
     border-radius:5px;
@@ -1637,11 +1654,14 @@ textarea:-moz-placeholder {/* for FF */
     left:-64px;
     top:-1px;
 }
-#message {
+.msg-input {
     width:550px;
     padding:3px 5px;
     height:25px;
     vertical-align:top;
+}
+.personal-msg-panel .msg-input {
+    width:486px;
 }
 .say {
     position:absolute;
@@ -1659,7 +1679,8 @@ textarea:-moz-placeholder {/* for FF */
 .msg .txt {
     margin-left:64px;
 }
-#personal-msg-panel .msg .txt {
+.personal-msg-panel .msg-form,
+.personal-msg-panel .msg .txt {
     margin-right:64px;
 }
 .msg a {
@@ -1672,6 +1693,9 @@ textarea:-moz-placeholder {/* for FF */
     border:1px solid #ccc;
     border-top-left-radius:3px;
     border-top-right-radius:3px;
+}
+.personal-msg-panel .msg-main {
+    border-radius:3px;
 }
 .msg-main .say {
     background-image:url('../img/say_white.png');
@@ -1776,8 +1800,8 @@ textarea:-moz-placeholder {/* for FF */
     height:20px;
     vertical-align:top;
 }
-#group-message-form .submit,
-#group-message-form .cancel,
+.msg-form .submit,
+.msg-form .cancel,
 .reply-submit,
 .reply-cancel {
     margin-top:6px;
@@ -2087,13 +2111,6 @@ textarea:-moz-placeholder {/* for FF */
     width:auto;
     padding:6px 0;
 }
-#to-group a {
-    font-weight:normal;
-    padding:1px 5px;
-}
-#to-group a:hover {
-    text-decoration:none;
-}
 /*discuss to group*/
 #discuss-to-group-form .checkbox-label {
     display:inline-block;
@@ -2368,6 +2385,7 @@ textarea:-moz-placeholder {/* for FF */
 }
 #mass-msg {
     width:314px;
+    margin-bottom:3px;
 }
 #mass-email {
     width:322px;
