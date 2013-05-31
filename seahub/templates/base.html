@@ -65,6 +65,7 @@
                         <select id="mass-email" name="mass_email" multiple="multiple"></select><br/>
                         <p class="error hide"></p>
                         <input type="submit" value="{% trans "Submit"%}" />
+                        <input type="button" value="{% trans "Cancel"%}" />
                     </form>
 
                 </div>
@@ -280,7 +281,7 @@ $('#add-msg').click(function() {
         }
     });
 });
-
+/*
 $(document).click(function(e) {
     var target = e.target || event.srcElement,
         popup = $('#send-msg-form'),
@@ -289,6 +290,11 @@ $(document).click(function(e) {
         popup.addClass('hide');
         $('#add-msg').removeClass('add-msg-hl');
     }    
+});
+ */
+$('#send-msg-form [type="button"]').click(function() {
+        $('#send-msg-form').addClass('hide');
+        $('#add-msg').removeClass('add-msg-hl');
 });
 
 $('#send-msg-form').submit(function() {
