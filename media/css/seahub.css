@@ -185,6 +185,10 @@ p {
     color:#808080;
     font-size:12px;
 }
+.loading-tip { /*for img*/
+    display:block;
+    margin:1em auto;
+}
 .icon-plus, .icon-minus, .icon-pencil,
 .icon-star-empty, .icon-star {
     font-size:16px;
@@ -512,13 +516,13 @@ textarea:-moz-placeholder {/* for FF */
     background:#2d2d2d;
 }
 .top-bar-con {
-    color:#fff;
     height:24px;
     width:950px;
     margin:0 auto;
     position:relative;
 }
-#send-msg-form {
+#send-msg-popup {
+    width:320px;
     padding:15px;
     background:#fff;
     border:1px solid #ddd;
@@ -529,18 +533,17 @@ textarea:-moz-placeholder {/* for FF */
     z-index:100;/* for pages with jquery tabs*/
 }
 .top-bar-con .top-link {
-    color:#ddd;
-    font-weight:normal;
-    padding:0 2px;
-}
-.top-bar-con .top-link {
     display:inline-block;
     height:24px;
+    padding:0 2px;
     line-height:24px;
+    color:#ddd;
+    font-weight:normal;
 }
 .top-bar-con .my-info {
-    padding-left:5px;
-    border-left:1px solid #aaa;
+    color:#fff;
+    padding-right:7px;
+    border-right:1px solid #aaa;
     margin-right:3px;
 }
 .top-bar-con button {
@@ -2421,9 +2424,6 @@ textarea:-moz-placeholder {/* for FF */
 }
 #tabs-nav li a:hover {
     color:#DD4B39;
-}
-#send-msg-tabs-nav li a:hover {
-    color:#333;
 }
 #tabs .ui-tabs-panel {
     padding:0;

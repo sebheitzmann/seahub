@@ -42,9 +42,9 @@
 
                     <div class="account fright">
                         {% if request.user.is_authenticated %}
+                        <span class="my-info"><a href="{% url 'edit_profile' %}" class="top-link avatar-link" title="{% trans 'Profile Setting' %}">{% avatar request.user 16 %}</a> <span class="bold">{{ request.user }}</span></span>
                         <button class="icon-envelope" id="add-msg" title="{% trans "send a message" %}"></button>
                         <button data-url="{% url 'message_list' %}" id="msg-count" title="{% trans "unread messages" %}">0</button>
-                        <span class="my-info"><a href="{% url 'edit_profile' %}" class="top-link avatar-link" title="{% trans 'Profile Setting' %}">{% avatar request.user 16 %}</a> <span class="bold">{{ request.user }}</span></span>
                         <a href="{{ SITE_ROOT }}accounts/logout/" class="top-link">{% trans "Log out" %}</a>
                         {% else %}
                         <a href="{{ SITE_ROOT }}accounts/login/" class="top-link">{% trans "Log In" %}</a>
@@ -60,13 +60,16 @@
                         </ul>
                     </div>
 
-                    <form id="send-msg-form" action="{% url 'message_send' %}" method="post" name="send-msg-form" class="hide">{% csrf_token %}
-                        <textarea id="mass-msg" name="mass_msg" placeholder="{% trans "message..." %}"></textarea><br/>
-                        <select id="mass-email" name="mass_email" multiple="multiple"></select><br/>
-                        <p class="error hide"></p>
-                        <input type="submit" value="{% trans "Submit"%}" />
-                        <input type="button" value="{% trans "Cancel"%}" />
-                    </form>
+                    <div id="send-msg-popup" class="hide">
+                        <img src="{{MEDIA_URL}}img/loading-icon.gif" class="loading-tip" />
+                        <form id="send-msg-form" action="{% url 'message_send' %}" method="post" name="send-msg-form" class="hide">{% csrf_token %}
+                            <textarea id="mass-msg" name="mass_msg" placeholder="{% trans "message..." %}"></textarea><br/>
+                            <select id="mass-email" name="mass_email" multiple="multiple"></select><br/>
+                            <p class="error hide"></p>
+                            <input type="submit" value="{% trans "Submit"%}" />
+                            <input type="button" value="{% trans "Cancel"%}" />
+                        </form>
+                    </div>
 
                 </div>
             </div>
@@ -246,15 +249,17 @@ $(document).ready(function(){
 });
 
 $('#add-msg').click(function() {
-    var form = $('#send-msg-form'),
-        add_msg_btn = $('#add-msg');
+    var add_msg_btn = $('#add-msg'),
+        popup = $('#send-msg-popup');
 
-    if (!form.hasClass('hide')) {
-        form.addClass('hide');
+    if (!popup.hasClass('hide')) {
+        popup.addClass('hide');
         add_msg_btn.removeClass('add-msg-hl');
         return;
     }
 
+    popup.removeClass('hide');
+    add_msg_btn.addClass('add-msg-hl');
     $.ajax({
         url:'{% url 'get_contacts' %}',
         cache: false,
@@ -263,8 +268,8 @@ $('#add-msg').click(function() {
             var contacts = data['contacts'],
                 opts = '';
             if (contacts.length > 0) {
-                form.removeClass('hide');
-                add_msg_btn.addClass('add-msg-hl');
+                popup.find('.loading-tip').remove();
+                $('#send-msg-form').removeClass('hide');
 
                 for(var i = 0, len = contacts.length; i < len; i++) {
                    opts += '<option value="' + contacts[i] + '">' + contacts[i] + '</option>';
@@ -273,27 +278,27 @@ $('#add-msg').click(function() {
                     placeholder: "{% trans "send to: click to select contacts" %}"
                 });
             } else {
-                feedback("{% trans "please add contacts at first" %}" ,'error');
+                popup.html('<p>' + "{% trans "please add contacts at first" %}" + '</p>');
             }
         },
         error: function() {
-            feedback("{% trans "Failed to get your contacts for sending a message." %}" ,'error');
+            popup.html('<p class="error">' + "{% trans "Failed to get your contacts for sending a message." %}" + '</p>');
         }
     });
 });
 /*
 $(document).click(function(e) {
     var target = e.target || event.srcElement,
-        popup = $('#send-msg-form'),
+        popup = $('#send-msg-popup'),
         popup_switch = $('#add-msg');
-    if (!popup.is(target) && !popup.find('*').is(target) && !popup_switch.is(target)) {
+    if (!popup.hasClass('hide') && !popup.is(target) && !popup.find('*').is(target) && !popup_switch.is(target)) {
         popup.addClass('hide');
         $('#add-msg').removeClass('add-msg-hl');
     }    
 });
- */
+*/
 $('#send-msg-form [type="button"]').click(function() {
-        $('#send-msg-form').addClass('hide');
+        $('#send-msg-popup').addClass('hide');
         $('#add-msg').removeClass('add-msg-hl');
 });
 
@@ -348,7 +353,7 @@ $(document).click(function(e) {
     var target = e.target || event.srcElement,
         popup = $('#advanced-search-form'),
         popup_switch = $('#top-search-form .icon-caret-down');
-    if (!popup.is(target) && !popup.find('*').is(target) && !popup_switch.is(target)) {
+    if (!popup.hasClass('hide') && !popup.is(target) && !popup.find('*').is(target) && !popup_switch.is(target)) {
         popup.addClass('hide');
     }    
 });
